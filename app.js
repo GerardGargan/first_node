@@ -5,10 +5,19 @@ const fs = require('fs');
 const htmlfile = fs.readFileSync(__dirname + "/html/hellonode.html");
 
 const server = http.createServer((req,res) => {
-    console.log("request starting...");
-    res.writeHead(200, {"Content-Type": "text/html"});
-    res.write(htmlfile);
-    res.end();
+    const currentPath = req.url;
+    if(currentPath === '/') {
+        console.log("request starting...");
+        res.writeHead(200, {"Content-Type": "text/html"});
+        res.write(htmlfile);
+        res.end();
+    } else {
+        res.writeHead(404, {"Content-Type": "text/html"});
+        res.write("<h1>Content not found</h1>");
+        res.end();
+    }
+
+    
 });
 
 server.listen(PORT, (err) => {
