@@ -2,11 +2,11 @@ const http = require("http");
 const PORT = 3000;
 
 const fs = require('fs');
-const htmlfile = fs.readFileSync(__dirname + "html/hellonode.html");
+const htmlfile = fs.readFileSync(__dirname + "/html/hellonode.html");
 
 const server = http.createServer((req,res) => {
     console.log("request starting...");
-    res.setHeader("Content-Type", "text/html");
+    res.writeHead(200, {"Content-Type": "text/html"});
     res.write(htmlfile);
     res.end();
 });
